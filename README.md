@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/alcampos/graylog-plugin-alert-condition-delorean.svg?branch=master)](https://travis-ci.org/alcampos/graylog-plugin-alert-condition-delorean)
 
-Graylog plugin to go back in the past check the alert for a specified time and alert in the future
+Graylog plugin to go back in the past check the alert for a specified time and alert in the present
 
 **Required Graylog version:** 2.3 and later
 
@@ -18,6 +18,18 @@ Restart `graylog-server` and you are done.
 
 Usage
 -----
+
+*Function Prototype:*
+
+First we have to select the alert type **Delorean**
+![Alert Condition Selection](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_selection.png)
+
+Then we have to set all the common fields plus the **backtime** and the **staytime**
+![Alert Condition Fields](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_alert.png)
+
+All set! We now can go back search an event for sometime in the past and get the alert! This is usefull when the log have some delay and it's timestamp store isn't when the log arrives.
+
+Also you can use this feature to not just search for a 1 minute time event, all you have to do is set the **backtime** in 0.
 
 Getting started
 ---------------
