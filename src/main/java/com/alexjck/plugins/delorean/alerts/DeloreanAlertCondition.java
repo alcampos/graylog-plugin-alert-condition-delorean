@@ -22,11 +22,9 @@ import org.graylog2.plugin.configuration.fields.ConfigurationField;
 import org.graylog2.plugin.configuration.fields.NumberField;
 import org.graylog2.plugin.configuration.fields.TextField;
 import org.graylog2.plugin.indexer.searches.timeranges.AbsoluteRange;
-import org.graylog2.plugin.indexer.searches.timeranges.InvalidRangeParametersException;
 import org.graylog2.plugin.streams.Stream;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
-import org.joda.time.Seconds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,10 +36,12 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
     private static final Logger LOG = LoggerFactory.getLogger(FieldContentValueAlertCondition.class);
 
     private final Searches searches;
-    private final Configuration configuration;
+    @SuppressWarnings("unused")
+	private final Configuration configuration;
     private final String field;
     private final String value;
     private final Integer backtime;
+    private final Integer staytime;
 
     public interface Factory extends AlertCondition.Factory {
         @Override
@@ -68,7 +68,8 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
             final ConfigurationRequest configurationRequest = ConfigurationRequest.createWithFields(
                     new TextField("field", "Field", "", "Field name that should be checked", ConfigurationField.Optional.NOT_OPTIONAL),
                     new TextField("value", "Value", "", "Value that the field should be checked against", ConfigurationField.Optional.NOT_OPTIONAL),
-                    new NumberField("backtime", "Back Time", 0, "Number of minutes to go back to the past to check the value", ConfigurationField.Optional.NOT_OPTIONAL)
+                    new NumberField("backtime", "Back Time", 0, "Number of minutes to go back to the past to check the value", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new NumberField("staytime", "Stay Time", 1, "Number of minutes of the time to stay in the past", ConfigurationField.Optional.NOT_OPTIONAL)
             );
             configurationRequest.addFields(AbstractAlertCondition.getDefaultConfigurationFields());
 
@@ -101,6 +102,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
         this.field = (String) parameters.get("field");
         this.value = (String) parameters.get("value");
         this.backtime = (Integer) parameters.get("backtime");
+        this.staytime = (Integer) parameters.get("staytime");
     }
 
     @Override
@@ -119,7 +121,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
         SearchResult result = searches.search(
 		    query,
 		    filter,
-		    AbsoluteRange.create(Tools.nowUTC().minus(Minutes.minutes(backtime)), Tools.nowUTC().minus(Minutes.minutes(backtime)).minus(Seconds.seconds(configuration.getAlertCheckInterval()))),
+		    AbsoluteRange.create(Tools.nowUTC().minus(Minutes.minutes(backtime)), Tools.nowUTC().minus(Minutes.minutes(backtime)).minus(Minutes.minutes(staytime))),
 		    searchLimit,
 		    0,
 		    new Sorting(Message.FIELD_TIMESTAMP, Sorting.Direction.DESC)
