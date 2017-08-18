@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import org.graylog2.Configuration;
 import org.graylog2.alerts.AbstractAlertCondition;
-import org.graylog2.alerts.types.FieldContentValueAlertCondition;
 import org.graylog2.indexer.results.ResultMessage;
 import org.graylog2.indexer.results.SearchResult;
 import org.graylog2.indexer.searches.Searches;
@@ -33,7 +32,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
 public class DeloreanAlertCondition extends AbstractAlertCondition {
-    private static final Logger LOG = LoggerFactory.getLogger(FieldContentValueAlertCondition.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DeloreanAlertCondition.class);
 
     private final Searches searches;
     @SuppressWarnings("unused")
@@ -45,7 +44,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
 
     public interface Factory extends AlertCondition.Factory {
         @Override
-        FieldContentValueAlertCondition create(Stream stream,
+        DeloreanAlertCondition create(Stream stream,
                                                @Assisted("id") String id,
                                                DateTime createdAt,
                                                @Assisted("userid") String creatorUserId,

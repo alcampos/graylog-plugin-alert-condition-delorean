@@ -11,41 +11,43 @@ import javax.inject.Inject;
 
 public class DeloreanDecorator implements SearchResponseDecorator {
 
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private Decorator decorator;
 
-    @Inject
-    public DeloreanDecorator(@Assisted Decorator decorator) {
-        this.decorator = decorator;
-    }
+	@Inject
+	public DeloreanDecorator(@Assisted Decorator decorator) {
+		this.decorator = decorator;
+	}
 
-    @Override
-    public SearchResponse apply(SearchResponse searchResponse) {
-        return searchResponse;
-    }
+	@Override
+	public SearchResponse apply(SearchResponse searchResponse) {
+		return searchResponse;
+	}
 
-    public interface Factory extends SearchResponseDecorator.Factory {
-        @Override
-        DeloreanDecorator create(Decorator decorator);
+	public interface Factory extends SearchResponseDecorator.Factory {
+		@Override
+		DeloreanDecorator create(Decorator decorator);
 
-        @Override
-        DeloreanDecorator.Config getConfig();
+		@Override
+		DeloreanDecorator.Config getConfig();
 
-        @Override
-        DeloreanDecorator.Descriptor getDescriptor();
-    }
+		@Override
+		DeloreanDecorator.Descriptor getDescriptor();
+	}
 
-    public static class Config implements SearchResponseDecorator.Config {
+	public static class Config implements SearchResponseDecorator.Config {
 
-        @Override
-        public ConfigurationRequest getRequestedConfiguration() {
-            return new ConfigurationRequest();
-        }
-    }
+		@Override
+		public ConfigurationRequest getRequestedConfiguration() {
+			return new ConfigurationRequest();
+		}
+	}
 
-    public static class Descriptor extends SearchResponseDecorator.Descriptor {
-        public Descriptor() {
-            super("Sample decorator", "http://docs.graylog.org/", "Sample Decorator");
-        }
-    }
+	public static class Descriptor extends SearchResponseDecorator.Descriptor {
+		public Descriptor() {
+			super("Delorean Field Content Alert Condition",
+					"https://github.com/alcampos/graylog-plugin-alert-condition-delorean",
+					"This condition is triggered when in the past the content of messages is equal to a defined value.");
+		}
+	}
 }
