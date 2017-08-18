@@ -120,7 +120,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
         SearchResult result = searches.search(
 		    query,
 		    filter,
-		    AbsoluteRange.create(Tools.nowUTC().minus(Minutes.minutes(backtime)), Tools.nowUTC().minus(Minutes.minutes(backtime)).minus(Minutes.minutes(staytime))),
+		    AbsoluteRange.create(Tools.nowUTC().minus(Minutes.minutes(backtime)).minus(Minutes.minutes(staytime)), Tools.nowUTC().minus(Minutes.minutes(backtime))),
 		    searchLimit,
 		    0,
 		    new Sorting(Message.FIELD_TIMESTAMP, Sorting.Direction.DESC)
