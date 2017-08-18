@@ -95,7 +95,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
                                            @Assisted("userid") String creatorUserId,
                                            @Assisted Map<String, Object> parameters,
                                            @Assisted("title") @Nullable String title) {
-        super(stream, id, Type.FIELD_CONTENT_VALUE.toString(), createdAt, creatorUserId, parameters, title);
+        super(stream, id, DeloreanAlertCondition.class.getCanonicalName(), createdAt, creatorUserId, parameters, title);
         this.searches = searches;
         this.configuration = configuration;
         this.field = (String) parameters.get("field");
