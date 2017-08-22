@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/alcampos/graylog-plugin-alert-condition-delorean.svg?branch=master)](https://travis-ci.org/alcampos/graylog-plugin-alert-condition-delorean)
 
-Graylog plugin to go back in the past check the alert for a specified time and alert in the present
+Graylog plugin to go back to the past, check the alert for a specified time and alert in the present
 
 **Required Graylog version:** 2.3 and later
 
