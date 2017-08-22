@@ -9,7 +9,7 @@
 
     <groupId>com.alexjck.graylog.plugins</groupId>
     <artifactId>graylog-plugin-alert-condition-delorean</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -27,7 +27,7 @@
         <connection>scm:git:git@github.com:alcampos/graylog-plugin-alert-condition-delorean.git</connection>
         <developerConnection>scm:git:git@github.com:alcampos/graylog-plugin-alert-condition-delorean.git</developerConnection>
         <url>https://github.com/alcampos/graylog-plugin-alert-condition-delorean</url>
-        <tag>0.0.1</tag>
+        <tag>0.0.2</tag>
     </scm>
 
     <properties>

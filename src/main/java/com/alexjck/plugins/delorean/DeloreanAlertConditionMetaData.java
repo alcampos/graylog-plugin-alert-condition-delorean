@@ -33,7 +33,7 @@ public class DeloreanAlertConditionMetaData implements PluginMetaData {
 
     @Override
     public Version getVersion() {
-        return Version.fromPluginProperties(getClass(), PLUGIN_PROPERTIES, "version", Version.from(0, 0, 1, "unknown"));
+        return Version.fromPluginProperties(getClass(), PLUGIN_PROPERTIES, "version", Version.from(0, 0, 2, "unknown"));
     }
 
     @Override
