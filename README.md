@@ -27,7 +27,7 @@ First we have to select the alert type **Delorean**
 ![Alert Condition Selection](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_selection.png)
 
 
-Then we have to set all the common fields plus the **backtime** and the **staytime**
+Then we have to set all the common fields plus **query**, **backtime** and the **staytime**. In the query field you must complete it with a normal query that you do in the search field in the graylog search mode, for example **field:"value"**.
 
 
 ![Alert Condition Fields](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_alert.png)
