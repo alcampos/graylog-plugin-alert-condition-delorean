@@ -37,8 +37,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
     private final Searches searches;
     @SuppressWarnings("unused")
 	private final Configuration configuration;
-    private final String field;
-    private final String value;
+    private final String query;
     private final Integer backtime;
     private final Integer staytime;
 
@@ -65,13 +64,11 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
         @Override
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest configurationRequest = ConfigurationRequest.createWithFields(
-                    new TextField("field", "Field", "", "Field name that should be checked", ConfigurationField.Optional.NOT_OPTIONAL),
-                    new TextField("value", "Value", "", "Value that the field should be checked against", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new TextField("query", "Query", "", "Query that should be checked", ConfigurationField.Optional.NOT_OPTIONAL),
                     new NumberField("backtime", "Back Time", 0, "Number of minutes to go back to the past to check the value", ConfigurationField.Optional.NOT_OPTIONAL),
                     new NumberField("staytime", "Stay Time", 1, "Number of minutes of the time to stay in the past", ConfigurationField.Optional.NOT_OPTIONAL)
             );
             configurationRequest.addFields(AbstractAlertCondition.getDefaultConfigurationFields());
-
             return configurationRequest;
         }
     }
@@ -79,14 +76,14 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
     public static class Descriptor extends AlertCondition.Descriptor {
         public Descriptor() {
             super(
-                "Delorean Field Content Alert Condition",
+                "Delorean Query Alert Condition",
                 "https://github.com/alcampos/graylog-plugin-alert-condition-delorean",
-                "This condition is triggered when in the past the content of messages is equal to a defined value."
+                "This condition is triggered when in the past the content of messages match a defined query."
             );
         }
     }
 
-    @AssistedInject
+	@AssistedInject
     public DeloreanAlertCondition(Searches searches,
                                            Configuration configuration,
                                            @Assisted Stream stream,
@@ -98,16 +95,14 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
         super(stream, id, DeloreanAlertCondition.class.getCanonicalName(), createdAt, creatorUserId, parameters, title);
         this.searches = searches;
         this.configuration = configuration;
-        this.field = (String) parameters.get("field");
-        this.value = (String) parameters.get("value");
+        this.query = (String) parameters.get("query");
         this.backtime = (Integer) parameters.get("backtime");
         this.staytime = (Integer) parameters.get("staytime");
     }
 
     @Override
-    public CheckResult runCheck() {
+    public CheckResult runCheck() {        
         String filter = "streams:" + stream.getId();
-        String query = field + ":\"" + value + "\"";
         Integer backlogSize = getBacklog();
         boolean backlogEnabled = false;
         int searchLimit = 1;
@@ -153,8 +148,7 @@ public class DeloreanAlertCondition extends AbstractAlertCondition {
 
     @Override
     public String getDescription() {
-        return "field: " + field
-                + ", value: " + value
+        return "query: " + query
                 + ", grace: " + grace
                 + ", backtime: " + backtime
                 + ", repeat notifications: " + repeatNotifications;
