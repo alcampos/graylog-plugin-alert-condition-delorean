@@ -22,12 +22,17 @@ Usage
 *Function Prototype:*
 
 First we have to select the alert type **Delorean**
+
+
 ![Alert Condition Selection](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_selection.png)
 
+
 Then we have to set all the common fields plus the **backtime** and the **staytime**
+
+
 ![Alert Condition Fields](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_alert.png)
 
-All set! We now can go back search an event for sometime in the past and get the alert! This is usefull when the log have some delay and it's timestamp store isn't when the log arrives.
+All set! We now can go back search an event for sometime in the past and get the alert! This is usefull when the log have some delay and it's timestamp isn't the same as the EventReceivedTime when the log arrives.
 
 Also you can use this feature to not just search for a 1 minute time event, all you have to do is set the **backtime** in 0.
 
