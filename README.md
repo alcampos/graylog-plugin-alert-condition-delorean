@@ -24,13 +24,13 @@ Usage
 First we have to select the alert type **Delorean**
 
 
-![Alert Condition Selection](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_selection.png)
+![Alert Condition Selection](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_alert.png)
 
 
 Then we have to set all the common fields plus **query**, **backtime** and the **staytime**. In the query field you must complete it with a normal query that you do in the search field in the graylog search mode, for example **field:"value"**.
 
 
-![Alert Condition Fields](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_alert.png)
+![Alert Condition Fields](https://github.com/alcampos/graylog-plugin-alert-condition-delorean/blob/master/media/delorean_selection.png)
 
 All set! We now can go back search an event for sometime in the past and get the alert! This is usefull when the log have some delay and it's timestamp isn't the same as the EventReceivedTime when the log arrives.
 
